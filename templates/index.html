@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNIFORPRO — Uniformes Profissionais</title>
+<title>UNIFORSHERNK — Uniformes Profissionais</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -225,6 +225,120 @@
   .add-cart-btn:hover { background: var(--light-blue); }
   .add-cart-btn.added { background: var(--success); }
 
+  /* ── MODAL CATÁLOGO ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: rgba(10,22,40,0.75);
+    align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--cream); border-radius: 12px;
+    width: 100%; max-width: 900px;
+    max-height: 90vh; display: flex; flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.12);
+    animation: modalIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.93) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-header {
+    background: var(--navy); border-radius: 12px 12px 0 0;
+    padding: 1.2rem 1.6rem; border-bottom: 3px solid var(--accent);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .modal-header h2 {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem;
+    font-weight: 800; color: var(--white); text-transform: uppercase;
+    letter-spacing: 0.08em; margin: 0;
+  }
+  .modal-close {
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+    font-size: 1rem; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.25); }
+  .modal-filters {
+    padding: 1rem 1.6rem; display: flex; gap: 0.5rem; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(0,0,0,0.08); background: var(--white);
+    flex-shrink: 0;
+  }
+  .filter-btn {
+    background: var(--cream); border: 1.5px solid rgba(0,0,0,0.1);
+    color: var(--navy); padding: 0.35rem 1rem; border-radius: 20px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem;
+    font-weight: 600; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--navy); color: var(--white); border-color: var(--navy);
+  }
+  .modal-body {
+    overflow-y: auto; padding: 1.4rem 1.6rem;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem; flex: 1;
+  }
+  .modal-body::-webkit-scrollbar { width: 4px; }
+  .modal-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  .modal-product {
+    background: var(--white); border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 1.2rem; cursor: default; transition: all 0.25s;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .modal-product:hover {
+    border-color: var(--accent); transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .modal-product-icon { font-size: 2rem; line-height: 1; }
+  .modal-product-cat {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem;
+    font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .modal-product-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 1rem;
+    font-weight: 700; text-transform: uppercase; color: var(--navy);
+    line-height: 1.2;
+  }
+  .modal-product-desc {
+    font-size: 0.78rem; color: var(--gray); line-height: 1.4; flex: 1;
+  }
+  .modal-product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 0.6rem; gap: 0.5rem;
+  }
+  .modal-product-price {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem;
+    font-weight: 800; color: var(--blue); white-space: nowrap;
+  }
+  .modal-ask-btn {
+    background: var(--accent); color: var(--navy); border: none;
+    padding: 0.35rem 0.85rem; border-radius: 4px; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.05em; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .modal-ask-btn:hover { background: #f5b030; transform: translateY(-1px); }
+  .modal-empty {
+    grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gray);
+    font-size: 0.9rem;
+  }
+  .modal-discount-banner {
+    background: linear-gradient(90deg, var(--navy), var(--blue));
+    padding: 0.7rem 1.6rem;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .modal-discount-banner span {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem;
+    font-weight: 600; letter-spacing: 0.05em; color: rgba(255,255,255,0.75);
+  }
+  .modal-discount-banner strong { color: var(--accent); }
+
   /* ── VOICE CHAT ── */
   .chat-fab {
     position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
@@ -292,7 +406,6 @@
   }
   .head-btn:hover { background: rgba(255,255,255,0.25); }
 
-  /* voice status bar */
   .voice-status {
     background: linear-gradient(135deg, #0a1628, #1a3a6b);
     padding: 0.7rem 1.2rem;
@@ -384,7 +497,6 @@
     border-top: 1px solid rgba(0,0,0,0.08);
     display: flex; gap: 0.6rem; align-items: center;
   }
-  /* Mic button */
   .mic-btn {
     width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
     background: var(--cream); border: 1.5px solid rgba(0,0,0,0.12);
@@ -435,6 +547,11 @@
     .products-grid { grid-template-columns: repeat(2, 1fr); }
     nav { display: none; }
     .chat-panel { width: 94vw; right: 3vw; }
+    .modal-body { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  }
+  @media (max-width: 500px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .modal-body { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -463,7 +580,7 @@
       <h1>Uniformes<br><span>Profissionais</span><br>de Alta Qualidade</h1>
       <p>Somos especialistas em uniformes para empresas, clínicas, indústrias e escolas. Personalização com bordado inclusa em pedidos acima de 10 peças.</p>
       <div class="hero-btns">
-        <button class="btn-accent">Ver Catálogo</button>
+        <button class="btn-accent" onclick="openCatalog()">Ver Catálogo</button>
         <button class="btn-outline" onclick="toggleChat()">🎙️ Consultar por Voz</button>
       </div>
     </div>
@@ -608,7 +725,7 @@
   <div class="chat-head">
     <div class="chat-avatar">👨‍💼</div>
     <div class="chat-head-info">
-      <h3>Carlos — Consultor UniformPro</h3>
+      <h3>Carlão — Consultor UniformPro</h3>
       <div class="online-indicator"><div class="dot-green"></div><p>Online · Chat + Voz</p></div>
     </div>
     <div class="chat-head-actions">
@@ -616,7 +733,6 @@
     </div>
   </div>
 
-  <!-- Waveform status -->
   <div class="voice-status">
     <div id="waveform" class="idle">
       <div class="idle-bar"></div><div class="idle-bar"></div>
@@ -642,13 +758,95 @@
   </div>
 </div>
 
+<!-- MODAL CATÁLOGO -->
+<div class="modal-overlay" id="catalogModal" onclick="closeCatalogOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>✦ Catálogo Completo</h2>
+      <button class="modal-close" onclick="closeCatalog()">✕</button>
+    </div>
+    <div class="modal-filters" id="catalogFilters">
+      <button class="filter-btn active" onclick="filterCatalog('todos', this)">Todos</button>
+      <button class="filter-btn" onclick="filterCatalog('saude', this)">🥼 Saúde</button>
+      <button class="filter-btn" onclick="filterCatalog('corporativo', this)">👔 Corporativo</button>
+      <button class="filter-btn" onclick="filterCatalog('escolar', this)">🎓 Escolar</button>
+      <button class="filter-btn" onclick="filterCatalog('industrial', this)">🦺 Industrial</button>
+    </div>
+    <div class="modal-discount-banner">
+      <span>🔥 <strong>+10 peças → 15% off</strong></span>
+      <span>🚀 <strong>+50 peças → 25% off</strong></span>
+      <span>🪡 Bordado personalizado: <strong>+R$25 por peça</strong></span>
+    </div>
+    <div class="modal-body" id="catalogGrid"></div>
+  </div>
+</div>
+
 <script>
-// ── STATE ──
+// ── CATALOG DATA ──
+const CATALOG = [
+  { icon:'🥼', cat:'saude',       catLabel:'Saúde',       name:'Jaleco Médico Branco',    desc:'Tecido Oxford premium. P/M/G/GG. Bordado incluso. Lavável na máquina.', price:'R$ 89,90' },
+  { icon:'🥼', cat:'saude',       catLabel:'Saúde',       name:'Jaleco Médico Colorido',  desc:'Azul, verde e rosa. Anti-rugas. Acabamento reforçado. P/M/G/GG.',       price:'R$ 99,90' },
+  { icon:'🩺', cat:'saude',       catLabel:'Saúde',       name:'Conjunto Cirúrgico',      desc:'Calça + blusa. Tecido respirável. 6 cores. P/M/G.',                     price:'R$ 149,90' },
+  { icon:'👔', cat:'corporativo', catLabel:'Corporativo', name:'Camisa Social',           desc:'Slim fit. Branca, azul e cinza. Masculina e feminina. P/M/G/GG.',       price:'R$ 79,90' },
+  { icon:'👖', cat:'corporativo', catLabel:'Corporativo', name:'Calça Social',            desc:'Masculina e feminina. Corte reto. Alta durabilidade. P/M/G/GG.',        price:'R$ 119,90' },
+  { icon:'🤵', cat:'corporativo', catLabel:'Corporativo', name:'Conjunto Corporativo',    desc:'Camisa + calça completo. Ideal para empresas. P/M/G/GG.',               price:'R$ 189,90' },
+  { icon:'🦺', cat:'corporativo', catLabel:'Corporativo', name:'Colete Personalizado',    desc:'Com bordado de logo. Ótimo para eventos e equipes. P/M/G.',             price:'R$ 69,90' },
+  { icon:'🎓', cat:'escolar',     catLabel:'Escolar',     name:'Uniforme Escolar',        desc:'Camisa polo + calça ou saia. Tamanhos 2 ao 16. Tecido resistente.',     price:'R$ 139,90' },
+  { icon:'🧤', cat:'industrial',  catLabel:'Industrial',  name:'Avental Industrial',      desc:'Alta resistência. Proteção contra respingos e abrasão. P/M/G.',         price:'R$ 59,90' },
+  { icon:'🦺', cat:'industrial',  catLabel:'Industrial',  name:'Uniforme Refletivo',      desc:'Fitas 360°. Alta visibilidade. Norma NR-6. P/M/G.',                     price:'R$ 179,90' },
+];
+
+let currentFilter = 'todos';
+
+function openCatalog() {
+  document.getElementById('catalogModal').classList.add('open');
+  renderCatalog(currentFilter);
+}
+function closeCatalog() {
+  document.getElementById('catalogModal').classList.remove('open');
+}
+function closeCatalogOnOverlay(e) {
+  if (e.target === document.getElementById('catalogModal')) closeCatalog();
+}
+function filterCatalog(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCatalog(cat);
+}
+function renderCatalog(cat) {
+  const grid = document.getElementById('catalogGrid');
+  const items = cat === 'todos' ? CATALOG : CATALOG.filter(p => p.cat === cat);
+  if (!items.length) {
+    grid.innerHTML = '<div class="modal-empty">Nenhum produto encontrado.</div>';
+    return;
+  }
+  grid.innerHTML = items.map(p => `
+    <div class="modal-product">
+      <div class="modal-product-icon">${p.icon}</div>
+      <div class="modal-product-cat">${p.catLabel}</div>
+      <div class="modal-product-name">${p.name}</div>
+      <div class="modal-product-desc">${p.desc}</div>
+      <div class="modal-product-footer">
+        <span class="modal-product-price">${p.price}</span>
+        <button class="modal-ask-btn" onclick="askCarlao('${p.name}')">Perguntar ao Carlão</button>
+      </div>
+    </div>
+  `).join('');
+}
+function askCarlao(productName) {
+  closeCatalog();
+  if (!chatOpen) toggleChat();
+  setTimeout(async () => {
+    await processMsg('Quero saber mais sobre o ' + productName);
+  }, 500);
+}
+
+// ── CHAT STATE ──
 let chatOpen = false;
 const history = [];
 let recognition = null;
 let isRecording = false;
-let isSpeaking = false;
 let synth = window.speechSynthesis;
 
 // ── CHAT TOGGLE ──
@@ -657,8 +855,8 @@ function toggleChat() {
   document.getElementById('chatPanel').classList.toggle('open', chatOpen);
   if (chatOpen && history.length === 0) {
     setTimeout(() => {
-      addBotMsg("Olá! Sou o Carlos, consultor da UniformPro. Posso te ajudar a escolher uniformes para sua equipe! 👔 Pode falar por voz ou digitar.");
-      speak("Olá! Sou o Carlos, consultor da UniformPro. Pode falar por voz ou digitar. Como posso ajudar?");
+      addBotMsg("Salve! Aqui é o Carlão da UniformPro, tô on pra te ajudar véi! 👊 Pode falar por voz ou digitar, o que você tá precisando?");
+      speak("Salve! Aqui é o Carlão da UniformPro, tô on pra te ajudar. Pode falar por voz ou digitar. O que você tá precisando?");
     }, 400);
   }
 }
@@ -671,7 +869,6 @@ function addUserMsg(text) {
   document.getElementById('chatMessages').appendChild(d);
   scrollDown();
 }
-
 function addBotMsg(text) {
   const d = document.createElement('div');
   d.className = 'msg';
@@ -679,7 +876,6 @@ function addBotMsg(text) {
   document.getElementById('chatMessages').appendChild(d);
   scrollDown();
 }
-
 function showTyping() {
   const d = document.createElement('div');
   d.className = 'msg'; d.id = 'typing';
@@ -698,12 +894,10 @@ async function sendMessage() {
   input.value = '';
   await processMsg(text);
 }
-
 async function sendChip(text) {
   document.getElementById('quickChips').style.display = 'none';
   await processMsg(text);
 }
-
 function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
 
 async function processMsg(text) {
@@ -712,10 +906,14 @@ async function processMsg(text) {
   document.getElementById('sendBtn').disabled = true;
   showTyping();
   try {
+    // Garante que o histórico começa com "user"
+    const cleanHistory = [...history];
+    while (cleanHistory.length && cleanHistory[0].role !== 'user') cleanHistory.shift();
+
     const res = await fetch('/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: history })
+      body: JSON.stringify({ messages: cleanHistory })
     });
     const data = await res.json();
     removeTyping();
@@ -729,12 +927,12 @@ async function processMsg(text) {
   document.getElementById('sendBtn').disabled = false;
 }
 
-// ── VOICE SYNTHESIS (TTS) ──
+// ── TTS ──
 function speak(text) {
   if (!synth) return;
   synth.cancel();
   setWave(true);
-  setVoiceStatus('Carlos está falando...', true);
+  setVoiceStatus('Carlão está falando...', true);
   const utt = new SpeechSynthesisUtterance(text);
   utt.lang = 'pt-BR'; utt.rate = 1.0; utt.pitch = 1.0;
   const voices = synth.getVoices();
@@ -744,7 +942,7 @@ function speak(text) {
   synth.speak(utt);
 }
 
-// ── VOICE RECOGNITION (STT) ──
+// ── STT ──
 function toggleMic() {
   if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
     alert('Seu navegador não suporta reconhecimento de voz. Use Chrome.');
@@ -753,7 +951,6 @@ function toggleMic() {
   if (isRecording) { stopMic(); return; }
   startMic();
 }
-
 function startMic() {
   synth.cancel();
   const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -775,12 +972,9 @@ function startMic() {
     setTimeout(() => sendMessage(), 300);
   };
   recognition.onerror = () => stopMic();
-  recognition.onend = () => {
-    if (isRecording) stopMic();
-  };
+  recognition.onend = () => { if (isRecording) stopMic(); };
   recognition.start();
 }
-
 function stopMic() {
   isRecording = false;
   const btn = document.getElementById('micBtn');
@@ -790,7 +984,6 @@ function stopMic() {
   setVoiceStatus('Pronto para ouvir', false);
   if (recognition) { try { recognition.stop(); } catch(e){} }
 }
-
 function setWave(active) {
   const wf = document.getElementById('waveform');
   if (active) {
@@ -801,14 +994,13 @@ function setWave(active) {
     wf.innerHTML = Array.from({length:5}, () => `<div class="idle-bar"></div>`).join('');
   }
 }
-
 function setVoiceStatus(text, active) {
   const el = document.getElementById('voiceStatusText');
   el.textContent = text;
   el.className = active ? 'active' : '';
 }
 
-// Load voices
+// load voices
 if (synth) { synth.onvoiceschanged = () => synth.getVoices(); }
 
 // size chips
@@ -828,6 +1020,11 @@ function addCart(btn) {
     btn.classList.remove('added');
   }, 2000);
 }
+
+// fechar modal com ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCatalog();
+});
 </script>
 </body>
 </html>
